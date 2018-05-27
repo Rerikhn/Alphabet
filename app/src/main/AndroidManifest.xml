@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="magtu.com.example.alphabet">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_alphabet_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".HelloSplashScreen"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".LettersMenu" />
+        <activity android:name=".Letters.LetterA" />
+        <activity android:name=".Letters.LetterB" />
+        <activity android:name=".Letters.LetterC" />
+        <activity android:name=".Letters.LetterD" />
+        <activity android:name=".Letters.LetterE" />
+        <activity android:name=".Letters.LetterF" />
+        <activity android:name=".Letters.LetterG" />
+        <activity android:name=".Letters.LetterH" />
+        <activity android:name=".Letters.LetterI" />
+        <activity android:name=".Letters.LetterJ" />
+        <activity android:name=".Letters.LetterK" />
+        <activity android:name=".Letters.LetterL" />
+        <activity android:name=".Letters.LetterM" />
+        <activity android:name=".Letters.LetterN" />
+        <activity android:name=".Letters.LetterO" />
+        <activity android:name=".Letters.LetterP" />
+        <activity android:name=".Letters.LetterQ" />
+        <activity android:name=".Letters.LetterR" />
+        <activity android:name=".Letters.LetterS" />
+        <activity android:name=".Letters.LetterT" />
+        <activity android:name=".Letters.LetterU" />
+        <activity android:name=".Letters.LetterV" />
+        <activity android:name=".Letters.LetterW" />
+        <activity android:name=".Letters.LetterX" />
+        <activity android:name=".Letters.LetterY" />
+        <activity android:name=".Letters.LetterZ" />
+        <activity android:name=".MainActivity">
+
+        </activity>
+    </application>
+
+</manifest>

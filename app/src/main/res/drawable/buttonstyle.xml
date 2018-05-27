@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" >
+        <shape>
+            <corners android:radius="25dp"/>
+            <solid android:color="@color/colorButtons_pressed"/>
+            <padding
+                android:top="15dp"
+                android:right="15dp"
+                android:bottom="15dp"
+                android:left="15dp" />
+        </shape>
+    </item>
+    <item android:state_focused="true" >
+        <shape>
+            <corners android:radius="25dp"/>
+            <solid android:color="@color/colorButtons_pressed"/>
+            <padding
+                android:top="15dp"
+                android:right="15dp"
+                android:bottom="15dp"
+                android:left="15dp" />
+        </shape>
+    </item> <!-- focused -->
+    <item android:state_pressed="false" >
+        <shape>
+            <corners android:radius="25dp"/>
+            <solid android:color="@color/colorButtons_normal"/>
+            <padding
+                android:top="15dp"
+                android:right="15dp"
+                android:bottom="15dp"
+                android:left="15dp" />
+        </shape>
+    </item> <!-- default -->
+</selector>
+
