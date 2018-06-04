@@ -1,17 +1,13 @@
 package magtu.com.example.alphabet;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
+import android.graphics.*;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-
-import magtu.com.example.alphabet.R;
+import android.view.animation.*;
+import android.widget.*;
 
 /**
  * Intro activity
