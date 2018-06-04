@@ -11,10 +11,19 @@ import android.widget.*;
 import java.util.Locale;
 import magtu.com.example.alphabet.R;
 
+/**
+ * Letter A activity
+ * Other letter activity's have the same functionality
+ */
 public class LetterA extends AppCompatActivity {
 
+    // Image with animation
     ImageView image_touch;
+
+    // Google TTS engine
     TextToSpeech textToSpeech;
+
+    // Setting language for TTS
     int language;
 
     @Override
@@ -28,7 +37,7 @@ public class LetterA extends AppCompatActivity {
 
         image_touch.startAnimation(mEnlargeAnimation);
 
-        // Voice recognition
+        // Google TTS engine set-up
         textToSpeech = new TextToSpeech(LetterA.this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
@@ -54,6 +63,7 @@ public class LetterA extends AppCompatActivity {
         hideUI();
     }
 
+    // Touch listener to image buttons
     public void voiceLetterA(View view) {
         switch (view.getId()) {
             case R.id.image_apple_phonetic:

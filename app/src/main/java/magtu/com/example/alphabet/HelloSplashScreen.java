@@ -13,6 +13,9 @@ import android.widget.ImageView;
 
 import magtu.com.example.alphabet.R;
 
+/**
+ * Intro activity
+ */
 public class HelloSplashScreen extends AppCompatActivity {
 
     @Override
@@ -20,20 +23,29 @@ public class HelloSplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hello_splash_screen);
 
+        // Some images
         ImageView background = findViewById(R.id.background),
                 icon_a = findViewById(R.id.splash_a),
                 icon_b = findViewById(R.id.splash_l);
+
+        // Setting the background filter
         background.setColorFilter(Color.argb(200,0,0,0),
                 PorterDuff.Mode.SRC_ATOP);
 
+        // Transition and dissolution animations for images
         Animation a = AnimationUtils.loadAnimation(this, R.anim.splash_a),
-                b = AnimationUtils.loadAnimation(this, R.anim.splash_b),
+                  b = AnimationUtils.loadAnimation(this, R.anim.splash_b),
                 splash = AnimationUtils.loadAnimation(this, R.anim.splash);
 
+        //  Animation start when activity is create
         background.startAnimation(splash);
         icon_a.startAnimation(a);
         icon_b.startAnimation(b);
+
+        // Hide all android UI
         hideUI();
+
+        // Timer for release activity
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -43,7 +55,7 @@ public class HelloSplashScreen extends AppCompatActivity {
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
             }
-        }, 3500);
+        }, 2500);
     }
 
     @Override
@@ -58,6 +70,7 @@ public class HelloSplashScreen extends AppCompatActivity {
         hideUI();
     }
 
+    // Function to hide all android UI
     private void hideUI() {
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE

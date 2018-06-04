@@ -22,12 +22,24 @@ import android.widget.Toast;
 
 import java.util.Locale;
 
+/**
+ * Main menu activity
+ */
 public class MainActivity extends AppCompatActivity {
 
+    // Header text
     TextView text_title;
+
+    // Main menu buttons
     Button letters_button, about_button;
+
+    // Google TTS engine
     TextToSpeech textToSpeech;
+
+    // Background image
     ImageView background;
+
+    // Language set up for TTS
     int language;
 
     @Override
@@ -37,15 +49,14 @@ public class MainActivity extends AppCompatActivity {
 
         text_title = findViewById(R.id.text_title);
         background = findViewById(R.id.background);
-        /*background.setColorFilter(Color.argb(100,0,0,0),
-                PorterDuff.Mode.SRC_ATOP);*/
+
         letters_button = findViewById(R.id.letters_button);
         about_button = findViewById(R.id.about_button);
 
         Animation enlarge = AnimationUtils.loadAnimation(this, R.anim.enlarge),
             back = AnimationUtils.loadAnimation(this, R.anim.background);
 
-        // Voice (TTS)
+        // Google TTS engine set up
         textToSpeech = new TextToSpeech(MainActivity.this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
@@ -89,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         hideUI();
     }
 
+    // Google TTS engine
     public void voice(View view) {
         switch (view.getId()) {
             case R.id.text_title:
@@ -97,17 +109,20 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Not Supporting",
                             Toast.LENGTH_SHORT).show();
                 textToSpeech.setSpeechRate(0.7f);
-                textToSpeech.speak(text_title.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+                textToSpeech.speak(text_title.getText().toString(),
+                        TextToSpeech.QUEUE_FLUSH, null, null);
                 break;
         }
     }
 
+    // Animate function
     private void animate() {
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.scaling);
         text_title.startAnimation(anim);
         background.startAnimation(anim);
     }
 
+    // Touch listener for initialize letters menu activity
     public void MainActivityButtons(View view) {
         switch (view.getId()) {
             case R.id.letters_button:

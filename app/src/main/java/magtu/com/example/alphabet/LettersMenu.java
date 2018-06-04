@@ -11,10 +11,16 @@ import android.widget.ImageView;
 
 import magtu.com.example.alphabet.Letters.*;
 
+/**
+ * Menu letters activity
+ */
 public class LettersMenu extends AppCompatActivity {
 
+    // Letter buttons
     ImageButton a, b, c, d, e, f, g, h, i, j, k, l, m, n,
                 o, p, q, r, s, t, u, v, w, x, y, z;
+
+    // Background image
     ImageView background;
 
     @Override
@@ -96,6 +102,7 @@ public class LettersMenu extends AppCompatActivity {
         hideUI();
     }
 
+    // Touch listener to image buttons
     public void letters_menu_buttons(View view) {
         Intent intent;
         switch (view.getId()) {
