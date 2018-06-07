@@ -1,6 +1,10 @@
 package magtu.com.example.alphabet;
 
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +17,13 @@ import java.util.Locale;
 /**
  * Main menu activity
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
+
+    // Accelerometer
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private final float ALPHA = 0.1f;
+    private float[] accelValues;
 
     // Header text
     TextView text_title;
@@ -37,9 +47,17 @@ public class MainActivity extends AppCompatActivity {
 
         text_title = findViewById(R.id.text_title);
         background = findViewById(R.id.background);
-
+        background.setScaleX(1.3f);
+        background.setScaleY(1.3f);
         letters_button = findViewById(R.id.letters_button);
         about_button = findViewById(R.id.about_button);
+
+        // Setting accelerometer sensor
+        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        assert mSensorManager != null;
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mSensorManager.registerListener(this, mAccelerometer,
+                SensorManager.SENSOR_DELAY_FASTEST);
 
         Animation enlarge = AnimationUtils.loadAnimation(this, R.anim.enlarge),
             back = AnimationUtils.loadAnimation(this, R.anim.background);
@@ -70,10 +88,9 @@ public class MainActivity extends AppCompatActivity {
         hideUI();
         // Start animations
         animate();
-
         letters_button.startAnimation(enlarge);
         about_button.startAnimation(enlarge);
-        background.startAnimation(back);
+        //background.startAnimation(back);
     }
 
     @Override
@@ -107,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
     private void animate() {
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.scaling);
         text_title.startAnimation(anim);
-        background.startAnimation(anim);
+        //background.startAnimation(anim);
     }
 
     // Touch listener for initialize letters menu activity
@@ -129,4 +146,31 @@ public class MainActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+        if (sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            accelValues = lowPass(sensorEvent.values.clone(), accelValues);
+            about_button.setScaleX(accelValues[2] * 0.1f);
+            letters_button.setScaleX(accelValues[2] * 0.1f);
+            about_button.setScaleY(accelValues[2] * 0.1f);
+            letters_button.setScaleY(accelValues[2] * 0.1f);
+            background.setX(-accelValues[0] * 10);
+            background.setY(-accelValues[1] * 10);
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
+    }
+
+    // Low-pass smooth filtering for accelerometer
+    protected float[] lowPass(float[] input, float[] output) {
+        if (output == null) return input;
+
+        for (int i = 0; i < input.length; i++) {
+            output[i] = output[i] + ALPHA * (input[i] - output[i]);
+        }
+        return output;
+    }
 }
